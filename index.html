@@ -453,106 +453,6 @@
          color: #e5e7eb;
       }
 
-      /* Checkout form */
-      #checkout {
-         margin-top: 32px;
-      }
-
-      .checkout-card {
-         border-radius: 14px;
-         border: 1px solid #111827;
-         background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), rgba(15, 23, 42, 0.96));
-         padding: 16px 18px;
-         font-size: 13px;
-      }
-
-      .checkout-grid {
-         display: grid;
-         grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-         gap: 18px;
-      }
-
-      .form-group {
-         margin-bottom: 10px;
-      }
-
-      .form-group label {
-         display: block;
-         font-size: 12px;
-         margin-bottom: 4px;
-         color: #d1d5db;
-      }
-
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
-         width: 100%;
-         padding: 8px 9px;
-         border-radius: 8px;
-         border: 1px solid #1f2937;
-         background: rgba(15, 23, 42, 0.9);
-         color: #e5e7eb;
-         font-size: 13px;
-         resize: vertical;
-      }
-
-      .form-group textarea {
-         min-height: 70px;
-      }
-
-      .helper-text {
-         font-size: 11px;
-         color: #9ca3af;
-         margin-top: 4px;
-      }
-
-      .checkout-actions {
-         display: flex;
-         flex-wrap: wrap;
-         gap: 10px;
-         margin-top: 10px;
-      }
-
-      .btn-outline {
-         padding: 8px 14px;
-         border-radius: 999px;
-         border: 1px solid #374151;
-         background: transparent;
-         color: #e5e7eb;
-         font-size: 13px;
-         cursor: pointer;
-      }
-
-      .btn-outline:hover {
-         border-color: #4b5563;
-      }
-
-      .generated-message {
-         width: 100%;
-         height: 160px;
-         border-radius: 10px;
-         border: 1px dashed #374151;
-         background: rgba(15, 23, 42, 0.96);
-         color: #e5e7eb;
-         padding: 10px 12px;
-         font-size: 12px;
-         white-space: pre-wrap;
-         overflow-y: auto;
-      }
-
-      .status-text {
-         font-size: 12px;
-         margin-top: 6px;
-      }
-
-      .status-text.success {
-         color: #22c55e;
-      }
-
-      .status-text.error {
-         color: #f97316;
-      }
-
       /* Footer */
       footer {
          margin-top: 28px;
@@ -564,8 +464,7 @@
 
       /* Responsive tweaks */
       @media (max-width: 900px) {
-         .rift-grid,
-         .checkout-grid {
+         .rift-grid {
             grid-template-columns: minmax(0, 1fr);
          }
 
@@ -601,7 +500,7 @@
 <body>
    <!-- Top notice -->
    <div class="top-bar">
-      🔑 New stock daily • Instant key delivery to your email.
+      🔑 New stock daily • Pay with Cash App • Keys delivered via Discord.
    </div>
 
    <!-- Navbar -->
@@ -620,8 +519,7 @@
             <a href="#products">Products</a>
             <a href="#rift-products">Rift Store</a>
             <a href="#buy">Buy</a>
-            <a href="#checkout">Checkout</a>
-            <a href="#status">Status</a>
+            <a href="#status">Info</a>
             <a href="#contact">Contact</a>
          </nav>
 
@@ -637,21 +535,21 @@
       <section id="top">
          <div class="hero-badge">
             <span class="hero-badge-dot"></span>
-            Trusted key reseller • Instant delivery
+            Trusted key reseller • Cash App payments
          </div>
 
          <h1 class="hero-title">Welcome to <span>KyoKeys</span></h1>
          <p class="hero-sub">
-            Buy access keys for games, software and services with automated email delivery.
-            Fast, safe and simple — handled over Discord and secure processors.
+            Buy access keys for games, scripts and services. Pay with Cash App and claim your key over Discord.
+            Fast, simple and safe.
          </p>
 
          <div class="hero-actions">
             <a href="#buy" class="primary-btn">
                Buy Now <span>↗</span>
             </a>
-            <a href="#products" class="secondary-btn">
-               View Products
+            <a href="https://discord.gg/scvDmwP9" target="_blank" class="secondary-btn">
+               Join Discord
             </a>
          </div>
 
@@ -695,30 +593,30 @@
          </div>
       </section>
 
-      <!-- Rift Store Products -->
+      <!-- Rift Store Products showcase -->
       <section id="rift-products" style="margin-top: 28px;">
          <div class="section-header">
-            <h2>Rift Store | Scripts Products</h2>
-            <p>Pick your Rift product and receive your key instantly after payment.</p>
+            <h2>Rift Store | Script Products</h2>
+            <p>Preview the products before you buy.</p>
          </div>
 
          <div class="rift-grid">
-            <!-- Jin Farm -->
+            <!-- Jin Farm showcase -->
             <div class="rift-card">
                <div class="rift-image-wrap">
-                  <!-- Keep jin-farm.png in same folder as index.html -->
+                  <!-- Make sure jin-farm.png is in this folder -->
                   <img src="jin-farm.png" alt="Rift Store Jin Farm" class="rift-img" />
                </div>
                <div class="rift-body">
                   <div class="rift-name">Rift Store | Jin Farm</div>
                   <div class="rift-price">$29.99</div>
                   <div class="rift-meta">
-                     Automated Jin farming access via Rift Store. Key delivered to your email instantly.
+                     Automated Jin farming access via Rift Store. Best for users who want fully automated progression.
                   </div>
                </div>
             </div>
 
-            <!-- General Hub Access -->
+            <!-- General Hub Access showcase -->
             <div class="rift-card">
                <div class="rift-image-wrap">
                   <div class="rift-logo-box">
@@ -730,7 +628,7 @@
                   <div class="rift-name">Rift Store | General Hub Access</div>
                   <div class="rift-price">$10.00</div>
                   <div class="rift-meta">
-                     General hub access key for Rift Store with instant email delivery after purchase.
+                     General hub access key for Rift Store with multiple scripts and utilities in one place.
                   </div>
                </div>
             </div>
@@ -741,7 +639,7 @@
       <section id="buy" style="margin-top: 32px;">
          <div class="section-header">
             <h2>Buy Rift Keys</h2>
-            <p>Select a product below, then continue to checkout.</p>
+            <p>Pay with Cash App, then join Discord to claim your key.</p>
          </div>
 
          <div class="rift-grid">
@@ -754,12 +652,28 @@
                   <div class="rift-name">Rift Store | Jin Farm</div>
                   <div class="rift-price">$29.99</div>
                   <div class="rift-meta">
-                     Automated Jin farming access via Rift Store. After purchase, your key will be delivered instantly to your email.
+                     1. Click “Pay with Cash App” and send exactly <strong>$29.99</strong> to <strong>$kyiswavy</strong>.<br />
+                     2. Take a screenshot of the payment.<br />
+                     3. Join the Discord and open a ticket to receive your key.
                   </div>
 
-                  <a href="#checkout" class="primary-btn" style="padding:8px 18px;font-size:13px;text-decoration:none;">
-                     Checkout with Jin Farm 🧾
-                  </a>
+                  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;">
+                     <!-- Cash App pay link (amount prefilled) -->
+                     <a href="https://cash.app/$kyiswavy/29.99"
+                        target="_blank"
+                        class="primary-btn"
+                        style="padding:8px 18px;font-size:13px;text-decoration:none;">
+                        Pay with Cash App 💵
+                     </a>
+
+                     <!-- Discord claim -->
+                     <a href="https://discord.gg/scvDmwP9"
+                        target="_blank"
+                        class="secondary-btn"
+                        style="font-size:13px;text-decoration:none;">
+                        Claim Key on Discord 💬
+                     </a>
+                  </div>
                </div>
             </div>
 
@@ -775,97 +689,35 @@
                   <div class="rift-name">Rift Store | General Hub Access</div>
                   <div class="rift-price">$10.00</div>
                   <div class="rift-meta">
-                     General hub access key for Rift Store. Once paid, you'll receive your key instantly by email.
+                     1. Click “Pay with Cash App” and send exactly <strong>$10.00</strong> to <strong>$kyiswavy</strong>.<br />
+                     2. Take a screenshot of the payment.<br />
+                     3. Join the Discord and open a ticket to receive your key.
                   </div>
 
-                  <a href="#checkout" class="primary-btn" style="padding:8px 18px;font-size:13px;text-decoration:none;">
-                     Checkout with Hub Access 🧾
-                  </a>
-               </div>
-            </div>
-         </div>
-      </section>
+                  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;">
+                     <!-- Cash App pay link (amount prefilled) -->
+                     <a href="https://cash.app/$kyiswavy/10"
+                        target="_blank"
+                        class="primary-btn"
+                        style="padding:8px 18px;font-size:13px;text-decoration:none;">
+                        Pay with Cash App 💵
+                     </a>
 
-      <!-- Checkout Form -->
-      <section id="checkout">
-         <div class="section-header">
-            <h2>Checkout</h2>
-            <p>Fill this out to generate a message you can send in Discord. Payments are handled manually for now.</p>
-         </div>
-
-         <div class="checkout-card">
-            <div class="checkout-grid">
-               <!-- Form side -->
-               <div>
-                  <form id="order-form">
-                     <div class="form-group">
-                        <label for="product">Product</label>
-                        <select id="product" name="product" required>
-                           <option value="jin-farm">Rift Store | Jin Farm – $29.99</option>
-                           <option value="general-hub">Rift Store | General Hub – $10.00</option>
-                        </select>
-                     </div>
-
-                     <div class="form-group">
-                        <label for="email">Email for key delivery</label>
-                        <input type="email" id="email" name="email" placeholder="you@example.com" required />
-                        <div class="helper-text">We’ll send your key to this email after payment is confirmed.</div>
-                     </div>
-
-                     <div class="form-group">
-                        <label for="discord">Discord @</label>
-                        <input type="text" id="discord" name="discord" placeholder="youruser or youruser#0000" required />
-                        <div class="helper-text">Use the same Discord you’ll join the server with.</div>
-                     </div>
-
-                     <div class="form-group">
-                        <label for="notes">Notes (optional)</label>
-                        <textarea id="notes" name="notes" placeholder="Anything we should know about your order?"></textarea>
-                     </div>
-
-                     <div class="checkout-actions">
-                        <button type="submit" class="primary-btn">
-                           Generate Discord Message 💬
-                        </button>
-
-                        <!-- Stripe / PayPal placeholders for future -->
-                        <button type="button" id="pay-stripe" class="btn-outline">
-                           Pay with Card (Stripe) – coming soon
-                        </button>
-                        <button type="button" id="pay-paypal" class="btn-outline">
-                           Pay with PayPal – coming soon
-                        </button>
-                     </div>
-
-                     <div class="helper-text" style="margin-top:8px;">
-                        After generating the message, paste it into a ticket in our Discord and we’ll send payment details.
-                     </div>
-                  </form>
-               </div>
-
-               <!-- Generated message side -->
-               <div>
-                  <label style="display:block;font-size:12px;margin-bottom:4px;color:#d1d5db;">
-                     Generated Discord message
-                  </label>
-                  <div id="generated-message" class="generated-message">
-                     Your order message will appear here after you click “Generate Discord Message 💬”.
-                  </div>
-                  <div id="copy-status" class="status-text"></div>
-
-                  <div style="margin-top:10px;font-size:12px;color:#9ca3af;">
-                     1. Click “Generate Discord Message 💬”<br />
-                     2. If it says “Copied”, go to our Discord and press <strong>Ctrl + V</strong><br />
-                     3. Open a ticket or DM staff with that message to complete payment.
-                     <br /><br />
-                     <strong>Discord:</strong>
-                     <a href="https://discord.gg/scvDmwP9" target="_blank" style="color:#93c5fd;text-decoration:underline;">
-                        Join KyoKeys Discord
+                     <!-- Discord claim -->
+                     <a href="https://discord.gg/scvDmwP9"
+                        target="_blank"
+                        class="secondary-btn"
+                        style="font-size:13px;text-decoration:none;">
+                        Claim Key on Discord 💬
                      </a>
                   </div>
                </div>
             </div>
          </div>
+
+         <p style="font-size:11px;color:#9ca3af;margin-top:10px;">
+            ⚠️ Make sure you pay the exact amount and keep your screenshot. Keys are delivered only after payment is confirmed.
+         </p>
       </section>
 
       <!-- Features / Info -->
@@ -877,37 +729,37 @@
          <div class="features-grid">
             <div class="feature-card">
                <div class="feature-title">
-                  <span>⚡</span> Instant Delivery
+                  <span>⚡</span> Fast Delivery
                </div>
                <p>
-                  All keys are sent automatically to the email you use at checkout, usually within seconds of payment.
+                  Once payment is confirmed in Cash App and you open a Discord ticket, keys are usually delivered within minutes.
                </p>
             </div>
 
             <div class="feature-card">
                <div class="feature-title">
-                  <span>🛡️</span> Secure Payments
+                  <span>💵</span> Simple Payments
                </div>
                <p>
-                  We use trusted payment processors so your transactions stay safe and protected.
+                  No cards or bank info on the site. All payments go through Cash App directly to <strong>$kyiswavy</strong>.
                </p>
             </div>
 
             <div class="feature-card">
                <div class="feature-title">
-                  <span>📞</span> 24/7 Support
+                  <span>📞</span> Support on Discord
                </div>
                <p>
-                  If you don’t see your key, contact us with your order ID and we’ll help you out fast.
+                  If anything goes wrong, open a ticket in the Discord and we’ll help you out one-on-one.
                </p>
             </div>
 
             <div class="feature-card">
                <div class="feature-title">
-                  <span>⭐</span> Verified Reviews
+                  <span>⭐</span> Growing Reputation
                </div>
                <p>
-                  We collect vouches and feedback from real customers to keep things transparent.
+                  We collect vouches and feedback in the Discord so you can see real customer experiences.
                </p>
             </div>
          </div>
@@ -929,6 +781,9 @@
                   https://discord.gg/scvDmwP9
                </a>
             </p>
+            <p style="margin-top: 10px;">
+               <strong>Cash App:</strong> $kyiswavy
+            </p>
          </div>
       </section>
 
@@ -941,100 +796,6 @@
    <script>
       // Update footer year
       document.getElementById("year").textContent = new Date().getFullYear();
-
-      // Basic product data + placeholder payment links for future
-      const products = {
-         "jin-farm": {
-            name: "Rift Store | Jin Farm",
-            price: "$29.99",
-            stripeLink: "https://your-stripe-link-for-jin-farm",   // TODO: replace when you have Stripe
-            paypalLink: "https://your-paypal-link-for-jin-farm"    // TODO: replace when you have PayPal
-         },
-         "general-hub": {
-            name: "Rift Store | General Hub Access",
-            price: "$10.00",
-            stripeLink: "https://your-stripe-link-for-general-hub", // TODO
-            paypalLink: "https://your-paypal-link-for-general-hub"  // TODO
-         }
-      };
-
-      const orderForm = document.getElementById("order-form");
-      const generatedBox = document.getElementById("generated-message");
-      const copyStatus = document.getElementById("copy-status");
-      const payStripeBtn = document.getElementById("pay-stripe");
-      const payPaypalBtn = document.getElementById("pay-paypal");
-
-      orderForm.addEventListener("submit", function (e) {
-         e.preventDefault();
-
-         const productId = document.getElementById("product").value;
-         const email = document.getElementById("email").value.trim();
-         const discord = document.getElementById("discord").value.trim();
-         const notes = document.getElementById("notes").value.trim();
-
-         const product = products[productId];
-
-         const messageLines = [
-            "KyoKeys Order Request",
-            "---------------------------",
-            `Product: ${product.name}`,
-            `Price: ${product.price}`,
-            "",
-            `Email: ${email}`,
-            `Discord: ${discord}`,
-            "",
-            notes ? `Notes: ${notes}` : "Notes: (none)",
-            "",
-            "Please confirm the payment method and total. Once paid, you can deliver the key to my email."
-         ];
-
-         const finalMessage = messageLines.join("\n");
-
-         // Show in box
-         generatedBox.textContent = finalMessage;
-
-         // Try to copy to clipboard
-         copyStatus.textContent = "";
-         copyStatus.className = "status-text";
-
-         if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(finalMessage)
-               .then(() => {
-                  copyStatus.textContent = "Message copied! Go to Discord and press Ctrl + V in a ticket or DM.";
-                  copyStatus.classList.add("success");
-               })
-               .catch(() => {
-                  copyStatus.textContent = "Could not automatically copy. Please select and copy the text manually.";
-                  copyStatus.classList.add("error");
-               });
-         } else {
-            copyStatus.textContent = "Your browser does not support auto-copy. Please select and copy the text manually.";
-            copyStatus.classList.add("error");
-         }
-      });
-
-      // Future: Stripe / PayPal buttons using payment links
-      payStripeBtn.addEventListener("click", function () {
-         const productId = document.getElementById("product").value;
-         const link = products[productId].stripeLink;
-
-         if (link && !link.startsWith("https://your-stripe-link")) {
-            window.open(link, "_blank");
-         } else {
-            alert("Stripe payments are not set up yet. For now, generate the Discord message and pay through staff.");
-         }
-      });
-
-      payPaypalBtn.addEventListener("click", function () {
-         const productId = document.getElementById("product").value;
-         const link = products[productId].paypalLink;
-
-         if (link && !link.startsWith("https://your-paypal-link")) {
-            window.open(link, "_blank");
-         } else {
-            alert("PayPal payments are not set up yet. For now, generate the Discord message and pay through staff.");
-         }
-      });
    </script>
 </body>
 </html>
