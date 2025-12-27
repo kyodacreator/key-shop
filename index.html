@@ -1,687 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>KyoKeys - Key Store</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>KyoKeys – Key Store</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+   <style>
+      * {
+         box-sizing: border-box;
+         margin: 0;
+         padding: 0;
+      }
 
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            background: radial-gradient(circle at top, #1f2937 0, #020617 45%, #000 100%);
-            color: #e5e7eb;
-            min-height: 100vh;
-        }
+      body {
+         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+         background: radial-gradient(circle at top, #1f2937 0%, #020617 45%, #000 100%);
+         color: #e5e7eb;
+         min-height: 100vh;
+      }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+      a {
+         color: inherit;
+         text-decoration: none;
+      }
 
-        /* Top notice bar */
-        .top-bar {
-            background: #1d2538;
-            color: #e5e7eb;
-            text-align: center;
-            padding: 6px 12px;
-            font-size: 13px;
-            border-bottom: 1px solid #111827;
-        }
+      /* Top notice bar */
+      .top-bar {
+         background: #1d2538;
+         color: #e5e7eb;
+         text-align: center;
+         padding: 6px 12px;
+         font-size: 13px;
+         border-bottom: 1px solid #111827;
+      }
 
-        /* Navbar */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            backdrop-filter: blur(14px);
-            background: rgba(2, 6, 23, 0.92);
-            border-bottom: 1px solid #111827;
-        }
+      /* Navbar */
+      header {
+         position: sticky;
+         top: 0;
+         z-index: 20;
+         backdrop-filter: blur(14px);
+         background: rgba(2, 6, 23, 0.92);
+         border-bottom: 1px solid #111827;
+      }
 
-        .nav {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+      .nav {
+         max-width: 1100px;
+         margin: 0 auto;
+         padding: 14px 20px;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         gap: 16px;
+      }
 
-        .logo-wrap {
-            display: flex;
-            align-items: center;
+      .logo-wrap {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+      }
+
+      .logo-circle {
+         width: 34px;
+         height: 34px;
+         border-radius: 999px;
+         background: linear-gradient(135deg, #a855f7, #6366f1);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-weight: 700;
+         color: #f9fafb;
+         box-shadow: 0 0 22px rgba(129, 140, 248, 0.7);
+      }
+
+      .logo-text-main {
+         font-weight: 700;
+         letter-spacing: 0.08em;
+         text-transform: uppercase;
+         font-size: 14px;
+      }
+
+      .logo-text-sub {
+         font-size: 11px;
+         color: #9ca3af;
+      }
+
+      .nav-links {
+         display: flex;
+         gap: 20px;
+         font-size: 14px;
+      }
+
+      .nav-links a {
+         color: #e5e7eb;
+         opacity: 0.8;
+         position: relative;
+         padding-bottom: 2px;
+      }
+
+      .nav-links a::after {
+         content: "";
+         position: absolute;
+         left: 0;
+         bottom: 0;
+         width: 0;
+         height: 2px;
+         background: linear-gradient(90deg, #6366f1, #a855f7);
+         transition: width 0.18s ease-out;
+      }
+
+      .nav-links a:hover {
+         opacity: 1;
+      }
+
+      .nav-links a:hover::after {
+         width: 100%;
+      }
+
+      .nav-actions {
+         display: flex;
+         gap: 8px;
+      }
+
+      .icon-btn {
+         width: 32px;
+         height: 32px;
+         border-radius: 999px;
+         border: 1px solid #1f2937;
+         background: radial-gradient(circle at top, #020617 0%, #020617 45%, #000 100%);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-size: 15px;
+         cursor: pointer;
+         color: #e5e7eb;
+      }
+
+      .icon-btn:hover {
+         border-color: #4b5563;
+      }
+
+      /* Page wrapper */
+      main {
+         max-width: 1100px;
+         margin: 32px auto 40px auto;
+         padding: 0 20px 40px 20px;
+      }
+
+      /* Hero */
+      #top {
+         padding-bottom: 26px;
+         border-bottom: 1px solid rgba(15, 23, 42, 0.8);
+         margin-bottom: 32px;
+      }
+
+      .hero-badge {
+         display: inline-flex;
+         align-items: center;
+         gap: 6px;
+         padding: 4px 10px;
+         border-radius: 999px;
+         font-size: 11px;
+         border: 1px solid #4c1d95;
+         background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.18), transparent 60%);
+         color: #c4b5fd;
+         margin-bottom: 12px;
+      }
+
+      .hero-badge-dot {
+         width: 7px;
+         height: 7px;
+         border-radius: 999px;
+         background: #22c55e;
+         box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+      }
+
+      .hero-title {
+         font-size: 32px;
+         font-weight: 800;
+         color: #f9fafb;
+         letter-spacing: 0.02em;
+         margin-bottom: 8px;
+      }
+
+      .hero-title span {
+         color: #8b5cf6;
+      }
+
+      .hero-sub {
+         font-size: 14px;
+         color: #9ca3af;
+         max-width: 440px;
+         line-height: 1.5;
+         margin-bottom: 20px;
+      }
+
+      .hero-actions {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 10px;
+         margin-bottom: 24px;
+      }
+
+      .primary-btn {
+         padding: 9px 16px;
+         border-radius: 999px;
+         font-size: 14px;
+         border: none;
+         cursor: pointer;
+         background: linear-gradient(135deg, #4f46e5, #a855f7);
+         color: #f9fafb;
+         display: inline-flex;
+         align-items: center;
+         gap: 6px;
+         box-shadow: 0 0 26px rgba(129, 140, 248, 0.6);
+      }
+
+      .secondary-btn {
+         padding: 8px 14px;
+         border-radius: 999px;
+         font-size: 13px;
+         border: 1px solid #374151;
+         background: rgba(15, 23, 42, 0.9);
+         color: #e5e7eb;
+         cursor: pointer;
+      }
+
+      .stats-row {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 16px;
+      }
+
+      .stat-pill {
+         flex: 1 1 140px;
+         min-width: 140px;
+         padding: 10px 14px;
+         border-radius: 14px;
+         background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.15), rgba(15, 23, 42, 0.95));
+         border: 1px solid #111827;
+      }
+
+      .stat-label {
+         font-size: 11px;
+         text-transform: uppercase;
+         letter-spacing: 0.1em;
+         color: #6b7280;
+         margin-bottom: 2px;
+      }
+
+      .stat-value {
+         font-size: 18px;
+         font-weight: 600;
+         color: #e5e7eb;
+      }
+
+      /* Section headers */
+      .section-header {
+         margin-bottom: 16px;
+      }
+
+      .section-header h2 {
+         font-size: 18px;
+         font-weight: 600;
+         color: #f9fafb;
+         margin-bottom: 4px;
+      }
+
+      .section-header p {
+         font-size: 12px;
+         color: #9ca3af;
+      }
+
+      /* Featured Products */
+      #products {
+         margin-bottom: 32px;
+      }
+
+      .products-card {
+         border-radius: 14px;
+         border: 1px solid #111827;
+         background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), rgba(15, 23, 42, 0.98));
+         padding: 16px 18px;
+      }
+
+      .product-tag {
+         font-size: 11px;
+         color: #9ca3af;
+         text-transform: uppercase;
+         letter-spacing: 0.16em;
+      }
+
+      .product-title {
+         margin-top: 4px;
+         font-size: 16px;
+         font-weight: 600;
+         color: #e5e7eb;
+      }
+
+      .product-meta {
+         font-size: 12px;
+         color: #9ca3af;
+         margin-top: 8px;
+      }
+
+      .view-btn {
+         display: inline-flex;
+         align-items: center;
+         gap: 6px;
+         margin-top: 12px;
+         font-size: 13px;
+         color: #bfdbfe;
+      }
+
+      .view-btn span {
+         font-size: 11px;
+      }
+
+      /* Rift Store section */
+      #rift-products {
+         margin-top: 28px;
+      }
+
+      .rift-grid {
+         display: grid;
+         grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+         gap: 18px;
+      }
+
+      .rift-card {
+         border-radius: 18px;
+         border: 1px solid #111827;
+         background: radial-gradient(circle at top, #020617 0%, #020617 45%, #000 100%);
+         overflow: hidden;
+         display: flex;
+         flex-direction: column;
+      }
+
+      .rift-image-wrap {
+         position: relative;
+         height: 230px;
+         overflow: hidden;
+         border-bottom: 1px solid #111827;
+      }
+
+      .rift-img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         display: block;
+      }
+
+      .rift-logo-box {
+         height: 230px;
+         background: radial-gradient(circle at top, #1d4ed8, #020617 70%);
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         gap: 6px;
+         color: #e5e7eb;
+      }
+
+      .rift-logo-main {
+         font-size: 24px;
+         font-weight: 700;
+         letter-spacing: 0.18em;
+         text-transform: uppercase;
+      }
+
+      .rift-logo-sub {
+         font-size: 11px;
+         letter-spacing: 0.25em;
+         text-transform: uppercase;
+         color: #9ca3af;
+      }
+
+      .rift-body {
+         padding: 14px 16px 16px 16px;
+      }
+
+      .rift-name {
+         font-size: 15px;
+         font-weight: 600;
+         margin-bottom: 4px;
+      }
+
+      .rift-price {
+         font-size: 14px;
+         color: #facc15;
+         font-weight: 600;
+         margin-bottom: 8px;
+      }
+
+      .rift-meta {
+         font-size: 12px;
+         color: #9ca3af;
+         line-height: 1.5;
+         margin-bottom: 14px;
+      }
+
+      .rift-btn {
+         display: inline-flex;
+         align-items: center;
+         gap: 6px;
+         font-size: 13px;
+         padding: 7px 0;
+         border-radius: 999px;
+         color: #60a5fa;
+         text-decoration: underline;
+      }
+
+      .rift-btn:hover {
+         color: #93c5fd;
+      }
+
+      /* Features row */
+      #status.features-row {
+         margin-top: 32px;
+      }
+
+      .features-grid {
+         display: grid;
+         grid-template-columns: repeat(4, minmax(0, 1fr));
+         gap: 12px;
+      }
+
+      .feature-card {
+         border-radius: 14px;
+         border: 1px solid #111827;
+         background: radial-gradient(circle at top left, #020617 0%, #020617 45%, #020617 100%);
+         padding: 10px 12px;
+         font-size: 12px;
+      }
+
+      .feature-title {
+         font-size: 12px;
+         font-weight: 600;
+         margin-bottom: 4px;
+         display: flex;
+         align-items: center;
+         gap: 6px;
+      }
+
+      .feature-title span {
+         font-size: 13px;
+      }
+
+      .feature-card p {
+         color: #9ca3af;
+      }
+
+      /* Contact */
+      #contact {
+         margin-top: 32px;
+      }
+
+      .contact-card {
+         border-radius: 14px;
+         border: 1px solid #111827;
+         background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.14), rgba(15, 23, 42, 0.96));
+         padding: 14px 16px;
+         font-size: 13px;
+      }
+
+      .contact-card strong {
+         color: #e5e7eb;
+      }
+
+      /* Footer */
+      footer {
+         margin-top: 28px;
+         font-size: 11px;
+         color: #6b7280;
+         border-top: 1px solid #020617;
+         padding-top: 12px;
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 900px) {
+         .rift-grid {
+            grid-template-columns: minmax(0, 1fr);
+         }
+
+         .features-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+         }
+      }
+
+      @media (max-width: 640px) {
+         .nav-links {
+            display: none;
+         }
+
+         .stats-row {
             gap: 10px;
-        }
+         }
 
-        .logo-circle {
-            width: 34px;
-            height: 34px;
-            border-radius: 999px;
-            background: radial-gradient(circle at 30% 30%, #a855f7, #1d4ed8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 18px;
-        }
+         .features-grid {
+            grid-template-columns: minmax(0, 1fr);
+         }
 
-        .logo-text-main {
-            font-weight: 700;
-            letter-spacing: 0.03em;
-        }
+         main {
+            padding: 0 14px 30px 14px;
+         }
 
-        .logo-text-sub {
-            font-size: 11px;
-            color: #9ca3af;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            font-size: 14px;
-        }
-
-        .nav-links a {
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 0;
-            height: 2px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #a855f7, #6366f1);
-            transition: width 0.2s ease-out;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .icon-btn {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            border: 1px solid #1f2937;
-            background: #020617;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .icon-btn:hover {
-            border-color: #a855f7;
-        }
-
-        /* Hero section */
-        .hero {
-            max-width: 1100px;
-            margin: 40px auto 10px;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 999px;
-            border: 1px solid rgba(168, 85, 247, 0.5);
-            background: rgba(15, 23, 42, 0.9);
-            font-size: 12px;
-            color: #e9d5ff;
-            margin-bottom: 14px;
-        }
-
-        .hero-title {
-            font-size: clamp(34px, 6vw, 44px);
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            margin-bottom: 4px;
-        }
-
-        .hero-title span {
-            background: linear-gradient(90deg, #a855f7, #6366f1);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 14px;
-            color: #9ca3af;
-            max-width: 520px;
-            margin: 0 auto 20px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            padding: 10px 22px;
-            border-radius: 999px;
-            border: none;
-            background: linear-gradient(120deg, #a855f7, #6366f1);
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .btn-secondary {
-            padding: 10px 20px;
-            border-radius: 999px;
-            border: 1px solid #1f2937;
-            background: #020617;
-            color: #e5e7eb;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .btn-secondary:hover {
-            border-color: #a855f7;
-        }
-
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 16px;
-            margin: 0 auto 40px;
-            max-width: 780px;
-        }
-
-        .stat-card {
-            border-radius: 14px;
-            padding: 16px 18px;
-            border: 1px solid #111827;
-            background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.2), transparent 55%);
-            text-align: left;
-        }
-
-        .stat-value {
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            margin-top: 4px;
-        }
-
-        /* Layout */
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 10px 20px 40px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 18px;
-        }
-
-        .section-header h2 {
-            font-size: 20px;
-        }
-
-        .section-header p {
-            font-size: 12px;
-            color: #9ca3af;
-        }
-
-        /* Generic product card */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
-        }
-
-        .product-card {
-            border-radius: 18px;
-            padding: 18px 18px 20px;
-            border: 1px solid #111827;
-            background: #020617;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-card::before {
-            content: "";
-            position: absolute;
-            inset: -40%;
-            opacity: 0.08;
-            background:
-                radial-gradient(circle at 10% 0, #a855f7, transparent 55%),
-                radial-gradient(circle at 90% 100%, #6366f1, transparent 55%);
-            pointer-events: none;
-        }
-
-        .product-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .product-tag {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            color: #a5b4fc;
-            margin-bottom: 8px;
-        }
-
-        .product-title {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .product-meta {
-            font-size: 13px;
-            color: #9ca3af;
-            margin-bottom: 14px;
-        }
-
-        .view-btn {
-            padding: 9px 16px;
-            border-radius: 999px;
-            border: 1px solid #a855f7;
-            background: rgba(15, 23, 42, 0.9);
-            font-size: 13px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .view-btn span {
-            font-size: 14px;
-        }
-
-        /* Rift products section */
-        .rift-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
-        }
-
-        .rift-card {
-            border-radius: 18px;
-            border: 1px solid #111827;
-            background: #020617;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .rift-image-wrap {
-            background: #020617;
-            padding: 10px;
-        }
-
-        .rift-img {
-            width: 100%;
-            border-radius: 14px;
-            display: block;
-            object-fit: cover;
-            max-height: 210px;
-        }
-
-        .rift-body {
-            padding: 16px 18px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .rift-name {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .rift-price {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .rift-btn {
-            margin-top: 8px;
-            padding: 9px 16px;
-            border-radius: 999px;
-            border: none;
-            background: #0b1220;
-            color: #e5e7eb;
-            font-size: 13px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border: 1px solid #1f2937;
-        }
-
-        .rift-btn:hover {
-            border-color: #38bdf8;
-        }
-
-        .rift-meta {
-            font-size: 12px;
-            color: #9ca3af;
-        }
-
-        /* NEW: built-in logo box for Rift Store */
-        .rift-logo-box {
-            height: 210px;
-            border-radius: 14px;
-            background:
-                radial-gradient(circle at top, rgba(56, 189, 248, 0.25), transparent 60%),
-                radial-gradient(circle at bottom, rgba(37, 99, 235, 0.4), transparent 65%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            border: 1px solid rgba(15, 23, 42, 0.9);
-            box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
-        }
-
-        .rift-logo-main {
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-        .rift-logo-sub {
-            font-size: 12px;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: #9ca3af;
-        }
-
-        /* Features row */
-        .features-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-top: 32px;
-        }
-
-        .feature-card {
-            border-radius: 14px;
-            padding: 16px 18px;
-            border: 1px solid #111827;
-            background: #020617;
-            font-size: 13px;
-        }
-
-        .feature-title {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid #111827;
-            padding: 18px 20px 26px;
-            text-align: center;
-            font-size: 11px;
-            color: #6b7280;
-        }
-
-        /* Frame corners */
-        .frame-corner {
-            position: fixed;
-            width: 80px;
-            height: 80px;
-            border: 1px solid rgba(148, 163, 184, 0.15);
-            border-radius: 12px;
-            z-index: -1;
-        }
-
-        .frame-top-left { top: 26%; left: 4%; border-right: none; border-bottom: none; }
-        .frame-top-right { top: 26%; right: 4%; border-left: none; border-bottom: none; }
-        .frame-bottom-left { bottom: 8%; left: 4%; border-right: none; border-top: none; }
-        .frame-bottom-right { bottom: 8%; right: 4%; border-left: none; border-top: none; }
-
-        @media (max-width: 640px) {
-            .nav-links {
-                display: none;
-            }
-        }
-    </style>
+         .hero-title {
+            font-size: 26px;
+         }
+      }
+   </style>
 </head>
+
 <body>
-<!-- KyoKeys Title Section -->
-<div style="text-align:center; padding:24px 10px;">
-  <h1 style="color:#a855f7; font-size:42px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">
-    KyoKeys
-  </h1>
-  <p style="color:#d1a5ff; font-size:14px;">
-    Digital keys & script access • Dark purple theme
-  </p>
-</div>
+   <!-- Top notice -->
+   <div class="top-bar">
+      🔑 New stock daily • Instant key delivery to your email.
+   </div>
 
-
-<div class="top-bar">
-    ⏳ New stock daily • Instant key delivery to your email.
-</div>
-
-<header>
-    <div class="nav">
-        <div class="logo-wrap">
+   <!-- Navbar -->
+   <header>
+      <div class="nav">
+         <div class="logo-wrap">
             <div class="logo-circle">K</div>
             <div>
-                <div class="logo-text-main">KyoKeys</div>
-                <div class="logo-text-sub">Premium key reseller</div>
+               <div class="logo-text-main">KyoKeys</div>
+               <div class="logo-text-sub">Premium key reseller</div>
             </div>
-        </div>
+         </div>
 
-        <nav class="nav-links">
+         <nav class="nav-links">
             <a href="#top">Home</a>
             <a href="#products">Products</a>
             <a href="#rift-products">Rift Store</a>
             <a href="#status">Status</a>
             <a href="#contact">Contact</a>
-        </nav>
+         </nav>
 
-        <div class="nav-actions">
+         <div class="nav-actions">
             <button class="icon-btn" title="Account">👤</button>
             <button class="icon-btn" title="Cart">🛒</button>
-        </div>
-    </div>
-</header>
+         </div>
+      </div>
+   </header>
 
-<div id="top" class="hero">
-    <div class="hero-badge">
-        🔑 Trusted Key Reseller • Instant Delivery
-    </div>
-    <h1 class="hero-title">
-        Welcome to <span>KyoKeys</span>
-    </h1>
-    <p class="hero-subtitle">
-        Buy access keys for games, software and services with automated email delivery.
-        Fast, safe and simple.
-    </p>
+   <main>
+      <!-- Hero -->
+      <section id="top">
+         <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Trusted key reseller • Instant delivery
+         </div>
 
-    <div class="hero-buttons">
-        <a href="#products"><button class="btn-primary">View Products 🛒</button></a>
-        <a href="#"><button class="btn-secondary">Join Discord</button></a>
-    </div>
+         <h1 class="hero-title">Welcome to <span>KyoKeys</span></h1>
+         <p class="hero-sub">
+            Buy access keys for games, software and services with automated email delivery.
+            Fast, safe and simple — handled over Discord and secure processors.
+         </p>
 
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-value">32</div>
-            <div class="stat-label">Products Sold</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">20</div>
-            <div class="stat-label">Total Customers</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">24/7</div>
-            <div class="stat-label">Support</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">5.0★</div>
-            <div class="stat-label">Average Rating</div>
-        </div>
-    </div>
-</div>
+         <div class="hero-actions">
+            <a href="#products" class="primary-btn">
+               View Products <span>↗</span>
+            </a>
+            <a href="https://discord.gg/scvDmwP9" target="_blank" class="secondary-btn">
+               Join Discord
+            </a>
+         </div>
 
-<main>
-    <!-- FEATURED PRODUCTS -->
-    <section id="products">
-        <div class="section-header">
-            <div>
-                <h2>Featured Products</h2>
-                <p>Choose a product line to view available keys.</p>
+         <div class="stats-row">
+            <div class="stat-pill">
+               <div class="stat-label">Products Sold</div>
+               <div class="stat-value">32</div>
             </div>
-        </div>
-
-        <div class="products-grid">
-            <!-- Single Rift Store card -->
-            <div class="product-card">
-                <div class="product-content">
-                    <div class="product-tag">Scripts</div>
-                    <div class="product-title">Rift Store</div>
-                    <div class="product-meta">
-                        Premium Roblox script products. Click below to view Rift Store scripts.
-                    </div>
-                    <a href="#rift-products" class="view-btn">
-                        View Rift Scripts <span>↗</span>
-                    </a>
-                </div>
+            <div class="stat-pill">
+               <div class="stat-label">Total Customers</div>
+               <div class="stat-value">20</div>
             </div>
-        </div>
-    </section>
-
-    <!-- RIFT STORE PRODUCTS -->
-    <section id="rift-products" style="margin-top:32px;">
-        <div class="section-header">
-            <div>
-                <h2>Rift Store | Scripts Products</h2>
-                <p>Pick your Rift product and receive your key instantly after payment.</p>
+            <div class="stat-pill">
+               <div class="stat-label">Support</div>
+               <div class="stat-value">24/7</div>
             </div>
-        </div>
+            <div class="stat-pill">
+               <div class="stat-label">Average Rating</div>
+               <div class="stat-value">5.0★</div>
+            </div>
+         </div>
+      </section>
 
-        <div class="rift-grid">
+      <!-- Featured Products -->
+      <section id="products">
+         <div class="section-header">
+            <h2>Featured Products</h2>
+            <p>Choose a product line to view available keys.</p>
+         </div>
+
+         <div class="products-card">
+            <div class="product-tag">Scripts</div>
+            <div class="product-title">Rift Store</div>
+            <p class="product-meta">
+               Premium Roblox script products. Click below to view Rift Store scripts and access.
+            </p>
+
+            <a href="#rift-products" class="view-btn">
+               View Rift Scripts <span>↗</span>
+            </a>
+         </div>
+      </section>
+
+      <!-- Rift Store Products -->
+      <section id="rift-products" style="margin-top: 28px;">
+         <div class="section-header">
+            <h2>Rift Store | Scripts Products</h2>
+            <p>Pick your Rift product and receive your key instantly after payment.</p>
+         </div>
+
+         <div class="rift-grid">
             <!-- Jin Farm -->
             <div class="rift-card">
-                <div class="rift-image-wrap">
-                    <!-- Make sure jin-farm.png is in this folder -->
-                    <img src="jin-farm.png" alt="Rift Store Jin Farm" class="rift-img">
-                </div>
-                <div class="rift-body">
-                    <div class="rift-name">Rift Store | Jin Farm</div>
-                    <div class="rift-price">$29.99</div>
-                    <div class="rift-meta">
-                        Automated Jin farming access via Rift Store. Key delivered to your email instantly.
-                    </div>
+               <div class="rift-image-wrap">
+                  <!-- Make sure jin-farm.png is in this folder -->
+                  <img src="jin-farm.png" alt="Rift Store Jin Farm" class="rift-img" />
+               </div>
+               <div class="rift-body">
+                  <div class="rift-name">Rift Store | Jin Farm</div>
+                  <div class="rift-price">$29.99</div>
+                  <div class="rift-meta">
+                     Automated Jin farming access via Rift Store. Key delivered to your email instantly.
+                  </div>
 
-                   
-                        
-                    </a>
-                </div>
+                  <a href="https://discord.gg/scvDmwP9" class="rift-btn" target="_blank">
+                     Order via Discord 💬
+                  </a>
+               </div>
             </div>
 
-            <!-- General Hub Access with built-in logo box -->
+            <!-- General Hub Access -->
             <div class="rift-card">
-                <div class="rift-image-wrap">
-                    <div class="rift-logo-box">
-                        <div class="rift-logo-main">Rift Store</div>
-                        <div class="rift-logo-sub">GENERAL HUB</div>
-                    </div>
-                </div>
-                <div class="rift-body">
-                    <div class="rift-name">Rift Store | General Hub Access</div>
-                    <div class="rift-price">$10.00</div>
-                    <div class="rift-meta">
-                        General hub access key for Rift Store with instant email delivery after purchase.
-                    </div>
-                    
+               <div class="rift-image-wrap">
+                  <div class="rift-logo-box">
+                     <div class="rift-logo-main">Rift Store</div>
+                     <div class="rift-logo-sub">General Hub</div>
+                  </div>
+               </div>
+               <div class="rift-body">
+                  <div class="rift-name">Rift Store | General Hub Access</div>
+                  <div class="rift-price">$10.00</div>
+                  <div class="rift-meta">
+                     General hub access key for Rift Store with instant email delivery after purchase.
+                  </div>
 
-                        Buy Now <span>↗</span>
-                    </a>
-                </div>
+                  <a href="https://discord.gg/scvDmwP9" class="rift-btn" target="_blank">
+                     Order via Discord 💬
+                  </a>
+               </div>
             </div>
-        </div>
-    </section>
+         </div>
+      </section>
 
-    <!-- FEATURES / INFO -->
-    <section id="status" class="features-row">
-        <div class="feature-card">
-            <div class="feature-title">⚡ Instant Delivery</div>
-            <p>All keys are sent automatically to the email you use at checkout, usually within seconds of payment.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-title">🛡 Secure Payments</div>
-            <p>We use trusted payment processors so your transactions stay safe and protected.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-title">📞 24/7 Support</div>
-            <p>If you don’t see your key, contact us with your order ID and we’ll help you out fast.</p>
-        </div>
-        <div class="feature-card" id="reviews">
-            <div class="feature-title">⭐ Verified Reviews</div>
-            <p>We collect vouches and feedback from real customers to keep things transparent.</p>
-        </div>
-    </section>
+      <!-- Features / Info -->
+      <section id="status" class="features-row">
+         <div class="section-header">
+            <h2>Features &amp; Info</h2>
+         </div>
 
-    <!-- CONTACT -->
-    <section id="contact" style="margin-top:32px;">
-        <div class="section-header">
-            <div>
-                <h2>Contact & Support</h2>
-                <p>Need help? Reach out before or after your purchase.</p>
+         <div class="features-grid">
+            <div class="feature-card">
+               <div class="feature-title">
+                  <span>⚡</span> Instant Delivery
+               </div>
+               <p>
+                  All keys are sent automatically to the email you use at checkout, usually within seconds of payment.
+               </p>
             </div>
-        </div>
-        <div class="feature-card">
-            <div class="feature-title">Discord Support</div>
-            <p>
-                Join our Discord for tickets, questions, or custom orders.<br>
-                <strong>Discord:</strong> <span>yourdiscordlinkhere</span>
+
+            <div class="feature-card">
+               <div class="feature-title">
+                  <span>🛡️</span> Secure Payments
+               </div>
+               <p>
+                  We use trusted payment processors so your transactions stay safe and protected.
+               </p>
+            </div>
+
+            <div class="feature-card">
+               <div class="feature-title">
+                  <span>📞</span> 24/7 Support
+               </div>
+               <p>
+                  If you don’t see your key, contact us with your order ID and we’ll help you out fast.
+               </p>
+            </div>
+
+            <div class="feature-card">
+               <div class="feature-title">
+                  <span>⭐</span> Verified Reviews
+               </div>
+               <p>
+                  We collect vouches and feedback from real customers to keep things transparent.
+               </p>
+            </div>
+         </div>
+      </section>
+
+      <!-- Contact & Support -->
+      <section id="contact">
+         <div class="section-header">
+            <h2>Contact &amp; Support</h2>
+            <p>Need help? Reach out before or after your purchase.</p>
+         </div>
+
+         <div class="contact-card">
+            <p><strong>Discord Support</strong></p>
+            <p style="margin-top: 6px;">
+               Join our Discord for tickets, questions, or custom orders.<br />
+               <strong>Discord:</strong>
+               <a href="https://discord.gg/scvDmwP9" target="_blank" style="color:#93c5fd;text-decoration:underline;">
+                  https://discord.gg/scvDmwP9
+               </a>
             </p>
-        </div>
-    </section>
-</main>
+         </div>
+      </section>
 
-<footer>
-    &copy; <span id="year"></span> KyoKeys. All rights reserved.
-</footer>
+      <!-- Footer -->
+      <footer>
+         &copy; <span id="year"></span> KyoKeys. All rights reserved.
+      </footer>
+   </main>
 
-<!-- Decorative frame corners -->
-<div class="frame-corner frame-top-left"></div>
-<div class="frame-corner frame-top-right"></div>
-<div class="frame-corner frame-bottom-left"></div>
-<div class="frame-corner frame-bottom-right"></div>
-
-<script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+   <script>
+      // Update footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
+   </script>
 </body>
 </html>
